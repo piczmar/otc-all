@@ -1,0 +1,9 @@
+*.class
+**/target/*
+# Package Files #
+*.jar
+# Eclipse Files #
+.classpath
+.project
+.settings/
+**/.settings/*
