@@ -13,4 +13,5 @@ public interface Printer {
 	 * @return string with sorted values separated with commas
 	 */
 	public <T extends Comparable<T>> String asSortedString(T... values);
+
 }
