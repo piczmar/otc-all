@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
 public class OTCPriorityQueueIntegerTest {
 
 	private PriorityQueue<Integer> priorityQueue;
-	private static final int RANDOM_NUMBERS_COUNT = 50;
+	private static final int RANDOM_NUMBERS_COUNT = 500;
 	private static Set<Integer> randomNumbers;
 
 	@BeforeClass
 	public static void initSuite() {
-		randomNumbers = TestUtil.generateUniqueRandomIntegers(RANDOM_NUMBERS_COUNT, 100);
+		randomNumbers = TestUtil.generateUniqueRandomIntegers(RANDOM_NUMBERS_COUNT, 1000);
 	}
 
 	@BeforeMethod
@@ -28,7 +28,6 @@ public class OTCPriorityQueueIntegerTest {
 	public void shouldPopGreatestElement() {
 		Integer elem1 = new Integer(Integer.MAX_VALUE);
 		priorityQueue.insert(elem1);
-		// Generating 500 random integers in range 0..999.
 		for (Integer number : randomNumbers) {
 			priorityQueue.insert(number);
 		}
@@ -38,7 +37,6 @@ public class OTCPriorityQueueIntegerTest {
 
 	@Test
 	public void shouldHaveSizeOfNumberInsertedElements() {
-		// Generating 500 random integers in range 0..999.
 		for (Integer number : randomNumbers) {
 			priorityQueue.insert(number);
 		}

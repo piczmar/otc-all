@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class TestUtil {
 	/**
-	 * Generates n random integers form range 0..range.
+	 * Generates n random integers in range 0..range.
 	 * 
 	 * @param n
 	 *            number count
