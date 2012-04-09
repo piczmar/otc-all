@@ -46,7 +46,7 @@ public class OTCPrinterIntegrationTest {
 		String expected = elements.get(0) + "," + elements.get(1) + "," + elements.get(2);
 
 		String actual = printer.asSortedString(elements.get(1), elements.get(2), elements.get(0));
-		
+
 		assertThat(actual).isEqualTo(expected);
 	}
 }

@@ -12,11 +12,13 @@ import org.testng.annotations.Test;
 public class OTCPrinterTest {
 
 	private OTCPrinter printer;
+	private PriorityQueue<DummyComparable> queue;
 	private List<DummyComparable> elements;
 
 	interface DummyComparable extends Comparable<DummyComparable> {
 	}
 
+	@SuppressWarnings("unchecked")
 	@BeforeMethod
 	public void setUp() {
 		printer = new OTCPrinter();
@@ -37,6 +39,8 @@ public class OTCPrinterTest {
 		Mockito.when(elements.get(0).toString()).thenReturn("elem0");
 		Mockito.when(elements.get(1).toString()).thenReturn("elem1");
 		Mockito.when(elements.get(2).toString()).thenReturn("elem2");
+		
+		queue = Mockito.mock(OTCPriorityQueue.class);
 	}
 
 	@Test
@@ -45,21 +49,25 @@ public class OTCPrinterTest {
 		String expected = "";
 
 		// when
-		String result = printer.asSortedString();
+		String result = printer.asSortedString(new String[]{});
 
 		// then
 		assertThat(result).isEqualTo(expected);
 	}
 
+	OTCPrinter mockPrinter = new OTCPrinter(){
+		@SuppressWarnings("unchecked")
+		@Override
+		protected <T extends java.lang.Comparable<T>> PriorityQueue<T> getPriorityQueue() {
+			return (PriorityQueue<T>) queue;
+		};
+	};
+	
 	@Test
 	public void shouldPrintCommaSeparatedElements() {
+		Mockito.when(queue.popMax()).thenReturn(elements.get(1)).thenReturn(elements.get(2)).thenReturn(elements.get(0));
 		String expected = elements.get(1) + "," + elements.get(2) + "," + elements.get(0);
-		OTCPrinter mockPrinter = new OTCPrinter(){
-			@Override
-			protected <T extends java.lang.Comparable<T>> T[] getSorted(T...values) {
-				return values;
-			};
-		};
+
 		
 		String actual = mockPrinter.asSortedString(elements.get(1), elements.get(2), elements.get(0));
 		
@@ -68,13 +76,8 @@ public class OTCPrinterTest {
 
 	@Test
 	public void shouldPrintCommaSeparatedElementsInSortedOrder() {
+		Mockito.when(queue.popMax()).thenReturn(elements.get(0)).thenReturn(elements.get(1)).thenReturn(elements.get(2));
 		String expected = elements.get(0) + "," + elements.get(1) + "," + elements.get(2);
-		OTCPrinter mockPrinter = new OTCPrinter() {
-			@Override
-			protected <T extends Comparable<T>> T[] getSorted(T... values) {
-				return (T[]) new DummyComparable[]{ elements.get(0),elements.get(1), elements.get(2)};
-			}
-		};
 
 		String actual = mockPrinter.asSortedString(elements.get(1), elements.get(2), elements.get(0));
 		

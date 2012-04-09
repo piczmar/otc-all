@@ -1,6 +1,5 @@
 package pl.piczkowski;
 
-import java.util.Collections;
 
 public class OTCPrinter implements Printer {
 
@@ -22,8 +21,8 @@ public class OTCPrinter implements Printer {
 		return buffer.toString();
 	}
 
-	protected <T extends Comparable<T>> T[] getSorted(T... values) {
-		PriorityQueue<T> queue = new OTCPriorityQueue<T>();
+	private <T extends Comparable<T>> T[] getSorted(T... values) {
+		PriorityQueue<T> queue = getPriorityQueue();
 		for (int i = 0; i < values.length; i++) {
 			queue.insert(values[i]);
 		}
@@ -31,6 +30,11 @@ public class OTCPrinter implements Printer {
 		for (int i = 0; i < values.length; i++) {
 			values[i] = queue.popMax();
 		}
+		queue = null; // let GC work
 		return values;
+	}
+	
+	protected  <T extends Comparable<T>> PriorityQueue<T> getPriorityQueue() {
+		return new OTCPriorityQueue<T>();
 	}
 }

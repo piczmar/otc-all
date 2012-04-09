@@ -1,18 +1,17 @@
 package pl.piczkowski;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static org.fest.assertions.Assertions.*;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.piczkowski.OTCPriorityQueue;
-import pl.piczkowski.PriorityQueue;
 
 public class OTCPriorityQueueTest {
 
@@ -150,6 +149,7 @@ public class OTCPriorityQueueTest {
 	}
 
 	class MockLock extends ReentrantLock {
+		private static final long serialVersionUID = -4211331634135276574L;
 		public boolean locked;
 		public boolean unlocked;
 
@@ -213,6 +213,8 @@ public class OTCPriorityQueueTest {
 	public void shouldSynchronizeRead() {
 		final MockLock lock = new MockLock();
 		final List<ITestElement> mockList = new ArrayList<ITestElement>() {
+			private static final long serialVersionUID = 5128106482358076831L;
+
 			@Override
 			public boolean isEmpty() {
 				assertThat(lock.locked).isEqualTo(true);
@@ -269,6 +271,8 @@ public class OTCPriorityQueueTest {
 	public void shouldSynchronizeSizeRead() {
 		final MockLock lock = new MockLock();
 		final List<ITestElement> mockList = new ArrayList<ITestElement>() {
+			private static final long serialVersionUID = 5673063491501244359L;
+
 			@Override
 			public int size() {
 				assertThat(lock.locked).isEqualTo(true);
