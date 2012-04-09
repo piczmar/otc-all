@@ -41,7 +41,7 @@
 							<include>pl/piczkowski/**/*.class</include>
 						</includes>
 					</instrumentation>
-					 <aggregate>true</aggregate>
+					<aggregate>true</aggregate>
 				</configuration>
 				<executions>
 					<execution>
@@ -89,33 +89,9 @@
 			<version>1.9.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.catch-exception</groupId>
-			<artifactId>catch-exception</artifactId>
-			<version>1.0.4</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert</artifactId>
 			<version>1.4</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.unitils</groupId>
-			<artifactId>unitils-core</artifactId>
-			<version>3.3</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
